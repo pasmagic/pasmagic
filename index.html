@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+(function(){var sent=/[?&]sent=1/.test(location.search);
+ if(!sent&&location.hash)history.replaceState(null,'',location.pathname+location.search);
+ function top(){if(sent)return;if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo({top:0,left:0,behavior:'instant'});}
+ window.addEventListener('load',function(){top();setTimeout(top,60);});window.addEventListener('pageshow',function(e){if(e.persisted)top();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PAS Magic | Pete Sciarrino, Magician &amp; Creator</title>
 <meta name="description" content="Pete Sciarrino is PAS Magic, a magician and creator with 30M+ followers worldwide. Brand partnerships, sponsorships and collabs.">
@@ -139,7 +144,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 /* BRANDS */
 .brands{padding:88px 0;background:#fff;color:#000;border-top:1px solid #E4E4E7}
 .brands .label{text-align:center;font-size:13px;letter-spacing:4px;font-weight:600;color:#52525B;margin-bottom:40px}
-.marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
 .logo-set{display:flex;align-items:center;gap:96px;padding-right:96px}
@@ -336,11 +341,33 @@ picture{display:contents}
   .hero h1{margin:14px 0 18px}
 }
 /* CAROUSELS: smooth on phones */
-.marquee-track{animation-name:marquee3d;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-@keyframes marquee3d{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-.marquee .shot,.marquee .ev{transform:translateZ(0)}
-@media(hover:none){.marquee:hover .marquee-track{animation-play-state:running}.shot:hover{transform:translateZ(0);border-color:var(--line)}.ev:hover img,.logo-set img:hover{transform:none}}
+.marquee-track{animation-name:marquee}
+@media(hover:none){.marquee:hover .marquee-track{animation-play-state:running}.shot:hover{transform:none;border-color:var(--line)}.ev:hover img,.logo-set img:hover{transform:none}}
 @media(max-width:700px){.shot-marquee .marquee-track{animation-duration:45s}.photo-marquee .marquee-track{animation-duration:40s}}
+
+.swipe-hint{display:none;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.brands .swipe-hint{color:#52525B}
+/* PHONES: sliders are swiped by hand */
+@media(max-width:900px),(hover:none){
+  .marquee{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-mask-image:none;mask-image:none;padding:0 20px}
+  .marquee::-webkit-scrollbar{display:none}
+  .marquee-track{animation:none!important;transform:none!important}
+  .marquee-track>[aria-hidden="true"]{display:none}
+  .logo-set>*,.shot-set>*,.photo-set>*{scroll-snap-align:start}
+  .logo-set{gap:40px;padding-right:20px}
+  .shot-set,.photo-set{gap:14px;padding-right:20px}
+  .swipe-hint{display:flex}
+}
+
+/* CLICKABLE BRAND DEALS */
+.shot-link{display:block;flex-shrink:0;color:#fff;border-radius:22px}
+.shot-link:focus-visible{outline:2px solid var(--navy-light);outline-offset:4px}
+.shot-play{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);color:#000;display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s}
+.shot-play svg{width:16px;height:16px;margin-left:2px}
+.shot-link:hover .shot-play{transform:scale(1.12);background:#fff}
+.shot-link:hover .shot{border-color:var(--navy)}
+.logo-link{display:block;flex-shrink:0}
+@media(max-width:900px),(hover:none){.shot-link{scroll-snap-align:start}}
 /* MOTION */
 .words span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);filter:blur(8px);animation:wordIn .9s cubic-bezier(.2,.7,.2,1) forwards}
 .words span:nth-of-type(1){animation-delay:.15s}.words span:nth-of-type(2){animation-delay:.27s}.words span:nth-of-type(3){animation-delay:.39s}
@@ -430,7 +457,7 @@ picture{display:contents}
     <div class="stats reveal stagger">
       <div class="stat"><b data-count="30" data-suffix="M+">30M+</b><span>Followers worldwide</span></div>
       <div class="stat"><b data-count="7" data-suffix="B+">7B+</b><span>Lifetime views</span></div>
-      <div class="stat"><b data-count="5.9" data-dec="1" data-suffix="M">5.9M</b><span>TikTok followers</span></div>
+      <div class="stat"><b data-count="6" data-suffix="M+">6M+</b><span>TikTok followers</span></div>
       <div class="stat"><b data-count="13.7" data-dec="1" data-suffix="M">13.7M</b><span>YouTube subscribers</span></div>
       <div class="stat"><b data-count="2.2" data-dec="1" data-suffix="B+">2.2B+</b><span>YouTube views</span></div>
       <div class="stat"><b data-count="2200" data-suffix="+">2,200+</b><span>YouTube videos</span></div>
@@ -445,27 +472,28 @@ picture{display:contents}
   <div class="marquee reveal">
     <div class="marquee-track">
         <div class="logo-set">
-          <picture><source type="image/avif" srcset="images/logo-coca-cola.avif"><img src="images/logo-coca-cola.webp" alt="Coca-Cola"></picture>
-          <picture><source type="image/avif" srcset="images/logo-lego.avif"><img src="images/logo-lego.webp" alt="LEGO"></picture>
-          <picture><source type="image/avif" srcset="images/logo-old-spice.avif"><img src="images/logo-old-spice.webp" alt="Old Spice"></picture>
-          <picture><source type="image/avif" srcset="images/logo-t-mobile.avif"><img src="images/logo-t-mobile.webp" alt="T-Mobile"></picture>
-          <picture><source type="image/avif" srcset="images/logo-dominos.avif"><img src="images/logo-dominos.webp" alt="Domino's"></picture>
+          <a class="logo-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Coca-Cola video"><picture><source type="image/avif" srcset="images/logo-coca-cola.avif"><img src="images/logo-coca-cola.webp" alt="Coca-Cola"></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's LEGO video"><picture><source type="image/avif" srcset="images/logo-lego.avif"><img src="images/logo-lego.webp" alt="LEGO"></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Old Spice video"><picture><source type="image/avif" srcset="images/logo-old-spice.avif"><img src="images/logo-old-spice.webp" alt="Old Spice"></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1DtF_0OVKo2hIjarVQtEaJQNPlmeCa8L4/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's T-Mobile video"><picture><source type="image/avif" srcset="images/logo-t-mobile.avif"><img src="images/logo-t-mobile.webp" alt="T-Mobile"></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Domino's video"><picture><source type="image/avif" srcset="images/logo-dominos.avif"><img src="images/logo-dominos.webp" alt="Domino's"></picture></a>
           <picture><source type="image/avif" srcset="images/logo-beats.avif"><img src="images/logo-beats.webp" alt="Beats by Dre"></picture>
           <picture><source type="image/avif" srcset="images/logo-vineyard-vines.avif"><img src="images/logo-vineyard-vines.webp" alt="Vineyard Vines"></picture>
           <picture><source type="image/avif" srcset="images/logo-butterfinger.avif"><img src="images/logo-butterfinger.webp" alt="Butterfinger"></picture>
         </div>
         <div class="logo-set" aria-hidden="true">
-          <picture><source type="image/avif" srcset="images/logo-coca-cola.avif"><img src="images/logo-coca-cola.webp" alt=""></picture>
-          <picture><source type="image/avif" srcset="images/logo-lego.avif"><img src="images/logo-lego.webp" alt=""></picture>
-          <picture><source type="image/avif" srcset="images/logo-old-spice.avif"><img src="images/logo-old-spice.webp" alt=""></picture>
-          <picture><source type="image/avif" srcset="images/logo-t-mobile.avif"><img src="images/logo-t-mobile.webp" alt=""></picture>
-          <picture><source type="image/avif" srcset="images/logo-dominos.avif"><img src="images/logo-dominos.webp" alt=""></picture>
+          <a class="logo-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/logo-coca-cola.avif"><img src="images/logo-coca-cola.webp" alt=""></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/logo-lego.avif"><img src="images/logo-lego.webp" alt=""></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/logo-old-spice.avif"><img src="images/logo-old-spice.webp" alt=""></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1DtF_0OVKo2hIjarVQtEaJQNPlmeCa8L4/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/logo-t-mobile.avif"><img src="images/logo-t-mobile.webp" alt=""></picture></a>
+          <a class="logo-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><picture><source type="image/avif" srcset="images/logo-dominos.avif"><img src="images/logo-dominos.webp" alt=""></picture></a>
           <picture><source type="image/avif" srcset="images/logo-beats.avif"><img src="images/logo-beats.webp" alt=""></picture>
           <picture><source type="image/avif" srcset="images/logo-vineyard-vines.avif"><img src="images/logo-vineyard-vines.webp" alt=""></picture>
           <picture><source type="image/avif" srcset="images/logo-butterfinger.avif"><img src="images/logo-butterfinger.webp" alt=""></picture>
         </div>
     </div>
   </div>
+  <div class="swipe-hint" aria-hidden="true">Swipe to see more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </section>
 
 <section class="about" id="about">
@@ -508,7 +536,7 @@ picture{display:contents}
       </a>
       <a class="p-card" href="https://www.tiktok.com/@pasmagic?lang=en" target="_blank" rel="noopener">
         <div class="top"><span class="ico"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></div>
-        <div><div class="name">TikTok</div><div class="handle">@pasmagic · 5.9M followers</div></div>
+        <div><div class="name">TikTok</div><div class="handle">@pasmagic · 6M+ followers</div></div>
       </a>
       <a class="p-card" href="https://www.instagram.com/pasmagic/" target="_blank" rel="noopener">
         <div class="top"><span class="ico"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></div>
@@ -537,35 +565,36 @@ picture{display:contents}
   <div class="marquee shot-marquee reveal">
     <div class="marquee-track">
       <div class="shot-set">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-1.avif"><img decoding="async" src="images/deal-coca-cola-1.webp" alt="Pete in his Coca-Cola sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-1.avif"><img decoding="async" src="images/deal-dominos-1.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-1.avif"><img decoding="async" src="images/deal-lego-1.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-1.avif"><img decoding="async" src="images/deal-old-spice-1.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-2.avif"><img decoding="async" src="images/deal-lego-2.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-2.avif"><img decoding="async" src="images/deal-dominos-2.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-2.avif"><img decoding="async" src="images/deal-coca-cola-2.webp" alt="Pete in his Coca-Cola sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-2.avif"><img decoding="async" src="images/deal-old-spice-2.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-3.avif"><img decoding="async" src="images/deal-lego-3.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-3.avif"><img decoding="async" src="images/deal-dominos-3.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-3.avif"><img decoding="async" src="images/deal-old-spice-3.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-4.avif"><img decoding="async" src="images/deal-lego-4.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
+        <a class="shot-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Coca-Cola video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-1.avif"><img decoding="async" src="images/deal-coca-cola-1.webp" alt="Pete in his Coca-Cola sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Domino's video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-1.avif"><img decoding="async" src="images/deal-dominos-1.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's LEGO video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-1.avif"><img decoding="async" src="images/deal-lego-1.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Old Spice video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-1.avif"><img decoding="async" src="images/deal-old-spice-1.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1xtQ9vANOEqntjY4rrWKk1wLc2MDGVvb1/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's LEGO video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-2.avif"><img decoding="async" src="images/deal-lego-2.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Domino's video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-2.avif"><img decoding="async" src="images/deal-dominos-2.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Coca-Cola video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-2.avif"><img decoding="async" src="images/deal-coca-cola-2.webp" alt="Pete in his Coca-Cola sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Old Spice video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-2.avif"><img decoding="async" src="images/deal-old-spice-2.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's LEGO video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-3.avif"><img decoding="async" src="images/deal-lego-3.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Domino's video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-3.avif"><img decoding="async" src="images/deal-dominos-3.webp" alt="Pete in his Domino's sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's Old Spice video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-3.avif"><img decoding="async" src="images/deal-old-spice-3.webp" alt="Pete in his Old Spice sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1xtQ9vANOEqntjY4rrWKk1wLc2MDGVvb1/view?usp=drivesdk" target="_blank" rel="noopener" aria-label="Watch Pete's LEGO video"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-4.avif"><img decoding="async" src="images/deal-lego-4.webp" alt="Pete in his LEGO sponsored video" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
       </div>
       <div class="shot-set" aria-hidden="true">
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-1.avif"><img decoding="async" src="images/deal-coca-cola-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-1.avif"><img decoding="async" src="images/deal-dominos-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-1.avif"><img decoding="async" src="images/deal-lego-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-1.avif"><img decoding="async" src="images/deal-old-spice-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-2.avif"><img decoding="async" src="images/deal-lego-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-2.avif"><img decoding="async" src="images/deal-dominos-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-2.avif"><img decoding="async" src="images/deal-coca-cola-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-2.avif"><img decoding="async" src="images/deal-old-spice-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-3.avif"><img decoding="async" src="images/deal-lego-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-3.avif"><img decoding="async" src="images/deal-dominos-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-3.avif"><img decoding="async" src="images/deal-old-spice-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption></figure>
-        <figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-4.avif"><img decoding="async" src="images/deal-lego-4.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption></figure>
+        <a class="shot-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-1.avif"><img decoding="async" src="images/deal-coca-cola-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-1.avif"><img decoding="async" src="images/deal-dominos-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-1.avif"><img decoding="async" src="images/deal-lego-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-1.avif"><img decoding="async" src="images/deal-old-spice-1.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1xtQ9vANOEqntjY4rrWKk1wLc2MDGVvb1/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-2.avif"><img decoding="async" src="images/deal-lego-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-2.avif"><img decoding="async" src="images/deal-dominos-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1ZWJODHlC88gqBm0GpmeulChHYpDvORA4/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-coca-cola-2.avif"><img decoding="async" src="images/deal-coca-cola-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Coca-Cola</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-2.avif"><img decoding="async" src="images/deal-old-spice-2.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1qAHdbH8hnGzsM3LWKBm8ZRWzwQNwd_D5/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-3.avif"><img decoding="async" src="images/deal-lego-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1t7GcJ6Lj9tvtuziQY3O9crExWruxkuAV/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-dominos-3.avif"><img decoding="async" src="images/deal-dominos-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Domino's</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1pkQ63wj6wUDG9i7EyoJ0XSxbVY6PTqcC/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-old-spice-3.avif"><img decoding="async" src="images/deal-old-spice-3.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>Old Spice</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
+        <a class="shot-link" href="https://drive.google.com/file/d/1xtQ9vANOEqntjY4rrWKk1wLc2MDGVvb1/view?usp=drivesdk" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><figure class="shot"><picture><source type="image/avif" srcset="images/deal-lego-4.avif"><img decoding="async" src="images/deal-lego-4.webp" alt="" loading="lazy" width="420" height="746"></picture><figcaption>LEGO</figcaption><span class="shot-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span></figure></a>
       </div>
           </div>
   </div>
+  <div class="swipe-hint" aria-hidden="true">Swipe to see more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </section>
 
 <section class="why">
@@ -645,6 +674,7 @@ picture{display:contents}
       </div>
           </div>
   </div>
+  <div class="swipe-hint" aria-hidden="true">Swipe to see more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
   <div class="wrap">
     <div class="venues reveal stagger">
       <div class="venue"><b>SoFi Stadium</b><span>Corporate close-up magic</span></div>
